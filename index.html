@@ -149,8 +149,8 @@ html:not(.dark) ::-webkit-scrollbar-thumb{background:var(--accent)}
 }
 
 /* tech stack */
-.tech-stack-section{position:relative;overflow:hidden;background:linear-gradient(135deg,#050505 0%,#101012 46%,#1a120f 100%)}
-.tech-stack-section::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent)}
+.tech-stack-section{position:relative;overflow:hidden;background:linear-gradient(135deg,#050505 0%,#0f1012 60%,#151217 100%)}
+.tech-stack-section::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:88px 88px;-webkit-mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent)}
 .logo-showcase{position:relative;z-index:1;display:grid;gap:1rem}
 .logo-lane{position:relative;display:grid;grid-template-columns:1fr;gap:.75rem;border:1px solid rgba(255,255,255,.1);background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));box-shadow:0 18px 44px rgba(0,0,0,.24);backdrop-filter:blur(18px);border-radius:1rem;padding:1rem 0}
 .lane-head{display:flex;align-items:center;gap:.75rem;padding:0 1.25rem}
@@ -543,105 +543,144 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
   </div>
 </section>
 
-<!-- TECH STACK -->
+<!-- TECH STACK (REVISED: static categorized grid, no marquee) -->
 <section id="tech-stack" class="tech-stack-section py-20">
   <div class="relative z-10 max-w-7xl mx-auto px-6">
-    <div class="max-w-3xl mb-12">
+    <div class="max-w-3xl mb-10">
       <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">TECH STACK</p>
-      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight">Technologies I Work With</h2>
-      <p class="reveal d2 text-zinc-400 leading-relaxed mt-4">A fast-moving showcase of the tools I use to build polished interfaces, APIs, databases, deployments, and delivery workflows.</p>
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight">Technologies I Work With</h2>
+      <p class="reveal d2 text-zinc-500 dark:text-zinc-400 leading-relaxed mt-4">A clear, easy-to-scan overview of the platforms and tools I use. Organized by category so recruiters can quickly understand my core strengths.</p>
     </div>
 
-    <div class="logo-showcase" aria-label="Technology logo showcase">
+    <style>
+      /* Scoped styles for the static tech stack grid */
+      .tech-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+      @media (min-width: 768px) { .tech-grid { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: 1fr; gap: 1.25rem; } }
+      /* Ensure 2x2 visual layout for four cards and balanced heights */
+      .tech-grid > .tech-card { display: flex; flex-direction: column; justify-content: flex-start; height: 100%; }
 
-      <article class="reveal d1 logo-lane">
-        <div class="lane-head">
-          <span aria-hidden="true"></span>
-          <h3>Frontend</h3>
-        </div>
-        <div class="logo-marquee">
-          <div class="logo-track">
-            <span class="logo-pill"><i class="devicon-react-original colored" aria-hidden="true"></i>React</span>
-            <span class="logo-pill"><i class="devicon-typescript-plain colored" aria-hidden="true"></i>TypeScript</span>
-            <span class="logo-pill"><i class="devicon-redux-original colored" aria-hidden="true"></i>Redux</span>
-            <span class="logo-pill"><i class="devicon-tailwindcss-original colored" aria-hidden="true"></i>Tailwind</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-react-original colored"></i>React</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-typescript-plain colored" aria-hidden="true"></i>TypeScript</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-redux-original colored" aria-hidden="true"></i>Redux</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-tailwindcss-original colored" aria-hidden="true"></i>Tailwind</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-react-original colored"></i>React</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-typescript-plain colored" aria-hidden="true"></i>TypeScript</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-redux-original colored" aria-hidden="true"></i>Redux</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-tailwindcss-original colored" aria-hidden="true"></i>Tailwind</span>
+      .tech-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; box-shadow: var(--card-shadow); display:flex; flex-direction:column; }
+      .tech-card:hover { transform: translateY(-2px); box-shadow: var(--card-hover-shadow); border-color: var(--accent); }
+
+      /* Orange accent glow on focus/hover — subtle ring */
+      .tech-card:focus-within, .tech-card:hover { outline: none; box-shadow: var(--card-hover-shadow), 0 0 0 6px rgba(255,107,53,0.06); }
+
+      .tech-card h3 { font-family: var(--font-display, 'PT Sans', sans-serif); font-weight: 700; font-size: 1.05rem; margin: 0; color: var(--text); }
+      /* Increase contrast for descriptions so content is easier to scan */
+      .tech-card p.lead { color: var(--text); font-size: .94rem; margin-top: .5rem; line-height:1.4; opacity: .94; }
+
+      /* Footer-aligned badges container: keeps visual balance when counts differ */
+      .tech-card .tech-badges { margin-top: auto; }
+
+      .tech-badges { display: flex; flex-wrap: wrap; gap: .5rem .75rem; margin-top: 1rem; align-items: center; }
+      .tech-badge { display: inline-flex; align-items: center; gap: .6rem; padding: .45rem .9rem; border-radius: 999px; font-weight: 600; font-size: .92rem; border: 1px solid transparent; background: var(--pill-bg); color: var(--pill-text); box-shadow: 0 1px 2px rgba(15,23,42,0.04); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+      .tech-badge i { width: 1.2rem; height: 1.2rem; display: inline-flex; align-items: center; justify-content: center; font-size: 1.05rem; border-radius: .35rem; background: rgba(255,255,255,0.92); padding: .18rem; }
+
+      .tech-badge:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.10); border-color: rgba(255,107,53,0.36); }
+
+      /* Prevent duplicated visuals from earlier marquee styles by ensuring they don't apply here */
+      .logo-lane, .logo-marquee, .logo-track, .logo-pill { display: none !important; }
+
+      /* Dark mode adjustments */
+      .dark .tech-card { background: var(--surface); border-color: var(--border); color: var(--text); box-shadow: var(--card-shadow); }
+      .dark .tech-badge { background: rgba(255,255,255,0.03); color: var(--pill-text); }
+
+      /* Accessibility: focus-visible styles */
+      .tech-card:focus-within { box-shadow: var(--card-hover-shadow), 0 0 0 6px rgba(255,107,53,0.06); }
+
+      /* Small utility to ensure consistent badge text contrast */
+      .tech-badge span { color: inherit; }
+      @media (min-width: 768px) { .tech-card { padding: 1.5rem; } }
+    </style>
+
+    <div class="tech-grid" role="list" aria-label="Technology categories">
+
+      <!-- Frontend -->
+      <article class="tech-card reveal d1" role="listitem" aria-labelledby="tech-frontend">
+        <div>
+          <p class="text-xs font-medium text-accent tracking-widest uppercase mb-2">Frontend</p>
+          <h3 id="tech-frontend">React & Modern UI</h3>
+          <p class="lead">Component-driven interfaces with type safety and utility-first styling.</p>
+          <div class="tech-badges">
+            <span class="tech-badge"><i class="devicon-react-original colored" aria-hidden="true"></i><span>React</span></span>
+            <span class="tech-badge"><i class="devicon-typescript-plain colored" aria-hidden="true"></i><span>TypeScript</span></span>
+            <span class="tech-badge"><i class="devicon-redux-original colored" aria-hidden="true"></i><span>Redux Toolkit</span></span>
+            <span class="tech-badge"><i class="devicon-nextjs-original colored" aria-hidden="true"></i><span>Next.js</span></span>
+            <span class="tech-badge"><i class="devicon-tailwindcss-original colored" aria-hidden="true"></i><span>Tailwind CSS</span></span>
           </div>
         </div>
       </article>
 
-      <article class="reveal d2 logo-lane">
-        <div class="lane-head">
-          <span aria-hidden="true"></span>
-          <h3>Backend</h3>
-        </div>
-        <div class="logo-marquee">
-          <div class="logo-track">
-            <span class="logo-pill"><i class="devicon-python-plain colored" aria-hidden="true"></i>Python</span>
-            <span class="logo-pill"><i class="devicon-django-plain colored" aria-hidden="true"></i>Django</span>
-            <span class="logo-pill"><i class="devicon-djangorest-plain colored" aria-hidden="true"></i>DRF</span>
-            <span class="logo-pill"><i class="devicon-nodejs-plain-wordmark colored" aria-hidden="true"></i>Node.js</span>
-            <span class="logo-pill"><i class="devicon-express-original colored" aria-hidden="true"></i>Express</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-python-plain colored" aria-hidden="true"></i>Python</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-django-plain colored" aria-hidden="true"></i>Django</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-djangorest-plain colored" aria-hidden="true"></i>DRF</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-nodejs-plain-wordmark colored" aria-hidden="true"></i>Node.js</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-express-original colored" aria-hidden="true"></i>Express</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-python-plain colored" aria-hidden="true"></i>Python</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-django-plain colored" aria-hidden="true"></i>Django</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-djangorest-plain colored" aria-hidden="true"></i>DRF</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-nodejs-plain-wordmark colored" aria-hidden="true"></i>Node.js</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-express-original colored" aria-hidden="true"></i>Express</span>
+      <!-- Backend -->
+      <article class="tech-card reveal d2" role="listitem" aria-labelledby="tech-backend">
+        <div>
+          <p class="text-xs font-medium text-accent tracking-widest uppercase mb-2">Backend</p>
+          <h3 id="tech-backend">Server & APIs</h3>
+          <p class="lead">Building production-ready servers, REST APIs and backend services.</p>
+          <div class="tech-badges">
+            <span class="tech-badge"><i class="devicon-nodejs-plain-wordmark colored" aria-hidden="true"></i><span>Node.js</span></span>
+            <span class="tech-badge"><i class="devicon-express-original colored" aria-hidden="true"></i><span>Express</span></span>
+            <span class="tech-badge"><i class="devicon-python-plain colored" aria-hidden="true"></i><span>Python</span></span>
+            <span class="tech-badge"><i class="devicon-django-plain colored" aria-hidden="true"></i><span>Django</span></span>
+            <span class="tech-badge"><i class="devicon-djangorest-plain colored" aria-hidden="true"></i><span>DRF</span></span>
+            <span class="tech-badge"><span aria-hidden="true">🔁</span><span>REST API</span></span>
           </div>
         </div>
       </article>
 
-      <article class="reveal d3 logo-lane">
-        <div class="lane-head">
-          <span aria-hidden="true"></span>
-          <h3>Database</h3>
-        </div>
-        <div class="logo-marquee">
-          <div class="logo-track">
-            <span class="logo-pill"><i class="devicon-postgresql-plain colored" aria-hidden="true"></i>PostgreSQL</span>
-            <span class="logo-pill"><i class="devicon-mongodb-plain colored" aria-hidden="true"></i>MongoDB</span>
-            <span class="logo-pill"><i class="devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-postgresql-plain colored" aria-hidden="true"></i>PostgreSQL</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-mongodb-plain colored" aria-hidden="true"></i>MongoDB</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-postgresql-plain colored" aria-hidden="true"></i>PostgreSQL</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-mongodb-plain colored" aria-hidden="true"></i>MongoDB</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
+      <!-- Database -->
+      <article class="tech-card reveal d3" role="listitem" aria-labelledby="tech-db">
+        <div>
+          <p class="text-xs font-medium text-accent tracking-widest uppercase mb-2">Database</p>
+          <h3 id="tech-db">Databases & Storage</h3>
+          <p class="lead">Reliable relational and flexible NoSQL systems for apps and services.</p>
+          <div class="tech-badges">
+            <span class="tech-badge"><i class="devicon-postgresql-plain colored" aria-hidden="true"></i><span>PostgreSQL</span></span>
+            <span class="tech-badge"><i class="devicon-mongodb-plain colored" aria-hidden="true"></i><span>MongoDB</span></span>
+            <span class="tech-badge"><i class="devicon-firebase-plain colored" aria-hidden="true"></i><span>Firebase</span></span>
           </div>
         </div>
       </article>
 
-      <article class="reveal d4 logo-lane">
-        <div class="lane-head">
-          <span aria-hidden="true"></span>
-          <h3>Cloud &amp; Tools</h3>
+      <!-- DevOps & Tools -->
+      <article class="tech-card reveal d4" role="listitem" aria-labelledby="tech-devops">
+        <div>
+          <p class="text-xs font-medium text-accent tracking-widest uppercase mb-2">DevOps &amp; Tools</p>
+          <h3 id="tech-devops">Deployment & Tooling</h3>
+          <p class="lead">Hosting, process management, CI/CD and developer tooling for production apps.</p>
+          <div class="tech-badges">
+            <span class="tech-badge"><i class="devicon-git-plain colored" aria-hidden="true"></i><span>Git</span></span>
+            <span class="tech-badge"><i class="devicon-github-original colored" aria-hidden="true"></i><span>GitHub</span></span>
+            <span class="tech-badge"><i class="devicon-amazonwebservices-plain-wordmark colored" aria-hidden="true"></i><span>AWS</span></span>
+            <span class="tech-badge"><span aria-hidden="true">🖥️</span><span>EC2</span></span>
+            <span class="tech-badge"><span aria-hidden="true">⚙️</span><span>PM2</span></span>
+            <span class="tech-badge"><i class="devicon-nginx-original colored" aria-hidden="true"></i><span>Nginx</span></span>
+            <span class="tech-badge"><i class="devicon-vercel-original colored" aria-hidden="true"></i><span>Vercel</span></span>
+            <span class="tech-badge"><i class="devicon-postman-plain colored" aria-hidden="true"></i><span>Postman</span></span>
+          </div>
         </div>
-        <div class="logo-marquee">
-          <div class="logo-track">
-            <span class="logo-pill"><i class="devicon-amazonwebservices-plain-wordmark colored" aria-hidden="true"></i>AWS</span>
-            <span class="logo-pill"><i class="devicon-github-original colored" aria-hidden="true"></i>GitHub</span>
-            <span class="logo-pill"><i class="devicon-vercel-original colored"></i>Vercel</span>
-            <span class="logo-pill"><i class="devicon-postman-plain colored" aria-hidden="true"></i>Postman</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-amazonwebservices-plain-wordmark colored" aria-hidden="true"></i>AWS</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-github-original colored" aria-hidden="true"></i>GitHub</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-vercel-original colored" aria-hidden="true"></i>Vercel</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-postman-plain colored" aria-hidden="true"></i>Postman</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-amazonwebservices-plain-wordmark colored" aria-hidden="true"></i>AWS</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-github-original colored"></i>GitHub</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-vercel-original colored" aria-hidden="true"></i>Vercel</span>
-            <span class="logo-pill" aria-hidden="true"><i class="devicon-postman-plain colored" aria-hidden="true"></i>Postman</span>
+      </article>
+
+      <!-- Integrations -->
+      <article class="tech-card reveal d5" role="listitem" aria-labelledby="tech-integrations">
+        <div>
+          <p class="text-xs font-medium text-accent tracking-widest uppercase mb-2">Integrations</p>
+          <h3 id="tech-integrations">Payments & Real-time</h3>
+          <p class="lead">Common integrations used in production systems for auth, realtime messaging and payments.</p>
+          <div class="tech-badges">
+            <span class="tech-badge"><span aria-hidden="true">🔒</span><span>JWT</span></span>
+            <span class="tech-badge"><span aria-hidden="true">🔁</span><span>Socket.IO</span></span>
+            <span class="tech-badge"><span aria-hidden="true">💳</span><span>Stripe</span></span>
+            <span class="tech-badge"><span aria-hidden="true">💸</span><span>Razorpay</span></span>
+            <span class="tech-badge" aria-label="Cloudinary">
+              <i aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M20.39 17.39A4.61 4.61 0 0016 13.5h-7a3.5 3.5 0 10-.06 7H18a4.5 4.5 0 002.39-2.11z" fill="currentColor" />
+                  <path d="M7.5 12a3 3 0 013-3h.5" stroke="currentColor" stroke-width="0" />
+                </svg>
+              </i>
+              <span>Cloudinary</span>
+            </span>
           </div>
         </div>
       </article>
