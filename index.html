@@ -142,6 +142,12 @@ html:not(.dark) ::-webkit-scrollbar-thumb{background:var(--accent)}
 .card-h > .p-6,.card-h > .p-7{flex:1;display:flex;flex-direction:column;justify-content:space-between}
 .card-h .p-6 a.nl,.card-h .p-7 a.nl{margin-top:auto}
 
+/* Ensure all service cards show accent border on hover */
+#services .card-h:hover{
+  border-color:var(--accent) !important;
+  box-shadow:var(--card-hover-shadow),0 0 0 4px rgba(255,107,53,0.05) !important;
+}
+
 /* tech stack */
 .tech-stack-section{position:relative;overflow:hidden;background:linear-gradient(135deg,#050505 0%,#101012 46%,#1a120f 100%)}
 .tech-stack-section::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent)}
@@ -376,8 +382,8 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
         <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Modern web applications built with React, Django, Node.js, and TypeScript — scalable, responsive, and optimized for real-world performance.</p>
       </article>
 
-      <article class="reveal d2 card-h group bg-zinc-900 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent">
-        <div class="w-12 h-12 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-xl mb-6 group-hover:bg-accent/20 transition-colors">
+      <article class="reveal d2 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+        <div class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
           <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
         </div>
         <h3 class="font-display font-bold text-xl text-white mb-3">Frontend Dev</h3>
