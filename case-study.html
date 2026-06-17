@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" x-data="{
-  dark: localStorage.getItem('theme')==='dark'||(!localStorage.getItem('theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches),
+  dark: localStorage.getItem('theme')!=='light',
   scrolled: false,
   mobileMenu: false,
   progress: 0
@@ -19,6 +19,14 @@
   <meta property="og:title" content="Novu — SaaS Dashboard · Case Study by Minhaj"/>
   <meta property="og:type" content="article"/>
   <title>Novu — SaaS Dashboard · Case Study — Minhaj</title>
+  <script>
+    if (localStorage.getItem('theme') !== 'light') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <style>
+    html.dark, html.dark body { background: #09090b; color: #f4f4f5; color-scheme: dark; }
+  </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
