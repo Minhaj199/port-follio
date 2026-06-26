@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="dark scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Minhaj PK is a Full Stack Developer from Kerala, India specializing in React, TypeScript, Node.js, Django, PostgreSQL, and modern web application development.">
@@ -14,7 +14,12 @@
 <title>Minhaj PK - Full Stack Developer | React, Django, Node.js & TypeScrip</title>
 <link rel="icon" type="image/x-icon" href="fevicon gpt.png">
 <script>
-  if (localStorage.getItem('theme') !== 'light') {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  localStorage.setItem('theme', savedTheme);
+
+  if (savedTheme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
     document.documentElement.classList.add('dark');
   }
 </script>
@@ -49,17 +54,7 @@
   ]
 }
 </script>
-<script>
-tailwind.config = {
-  darkMode: 'class',
-  theme: {
-    extend: {
-      fontFamily: { display: ['PT Sans','sans-serif'], body: ['DM Sans','sans-serif'] },
-      colors: { accent: '#FF6B2B', 'accent-light': '#FF8F5C' }
-    }
-  }
-}
-</script>
+
 
 <style>
 /* Theme variables: scalable design tokens */
@@ -604,7 +599,7 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
 
       .tech-badges { display: flex; flex-wrap: wrap; gap: .5rem .75rem; margin-top: 1rem; align-items: center; }
       .tech-badge { display: inline-flex; align-items: center; gap: .6rem; padding: .45rem .9rem; border-radius: 999px; font-weight: 600; font-size: .92rem; border: 1px solid transparent; background: var(--pill-bg); color: var(--pill-text); box-shadow: 0 1px 2px rgba(15,23,42,0.04); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-      .tech-badge i { width: 1.2rem; height: 1.2rem; display: inline-flex; align-items: center; justify-content: center; font-size: 1.05rem; border-radius: .35rem; background: rgba(255,255,255,0.92); padding: .18rem; }
+      .tech-badge-icon { width: 1.2rem; height: 1.2rem; display: inline-flex; flex: 0 0 auto; object-fit: contain; border-radius: .35rem; background: rgba(255,255,255,0.92); padding: .18rem; }
 
       .tech-badge:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.10); border-color: rgba(255,107,53,0.36); }
 
@@ -632,10 +627,10 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
           <h3 id="tech-frontend">React & Modern UI</h3>
           <p class="lead">Component-driven interfaces with type safety and utility-first styling.</p>
           <div class="tech-badges">
-            <span class="tech-badge"><i class="devicon-react-original colored" aria-hidden="true"></i><span>React</span></span>
-            <span class="tech-badge"><i class="devicon-typescript-plain colored" aria-hidden="true"></i><span>TypeScript</span></span>
-            <span class="tech-badge"><i class="devicon-redux-original colored" aria-hidden="true"></i><span>Redux Toolkit</span></span>
-            <span class="tech-badge"><i class="devicon-tailwindcss-original colored" aria-hidden="true"></i><span>Tailwind CSS</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/react-original.svg" alt="" aria-hidden="true"><span>React</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/typescript-plain.svg" alt="" aria-hidden="true"><span>TypeScript</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/redux-original.svg" alt="" aria-hidden="true"><span>Redux Toolkit</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/tailwindcss-original.svg" alt="" aria-hidden="true"><span>Tailwind CSS</span></span>
           </div>
         </div>
       </article>
@@ -647,11 +642,11 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
           <h3 id="tech-backend">Server & APIs</h3>
           <p class="lead">Building production-ready servers, REST APIs and backend services.</p>
           <div class="tech-badges">
-            <span class="tech-badge"><i class="devicon-nodejs-plain-wordmark colored" aria-hidden="true"></i><span>Node.js</span></span>
-            <span class="tech-badge"><i class="devicon-express-original colored" aria-hidden="true"></i><span>Express</span></span>
-            <span class="tech-badge"><i class="devicon-python-plain colored" aria-hidden="true"></i><span>Python</span></span>
-            <span class="tech-badge"><i class="devicon-django-plain colored" aria-hidden="true"></i><span>Django</span></span>
-            <span class="tech-badge"><i class="devicon-djangorest-plain colored" aria-hidden="true"></i><span>DRF</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/nodejs-plain-wordmark.svg" alt="" aria-hidden="true"><span>Node.js</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/express-original.svg" alt="" aria-hidden="true"><span>Express</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/python-plain.svg" alt="" aria-hidden="true"><span>Python</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/django-plain.svg" alt="" aria-hidden="true"><span>Django</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/djangorest-plain.svg" alt="" aria-hidden="true"><span>DRF</span></span>
             <span class="tech-badge"><span aria-hidden="true">🔁</span><span>REST API</span></span>
           </div>
         </div>
@@ -664,8 +659,8 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
           <h3 id="tech-db">Databases & Storage</h3>
           <p class="lead">Reliable relational and flexible NoSQL systems for apps and services.</p>
           <div class="tech-badges">
-            <span class="tech-badge"><i class="devicon-postgresql-plain colored" aria-hidden="true"></i><span>PostgreSQL</span></span>
-            <span class="tech-badge"><i class="devicon-mongodb-plain colored" aria-hidden="true"></i><span>MongoDB</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/postgresql-plain.svg" alt="" aria-hidden="true"><span>PostgreSQL</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/mongodb-plain.svg" alt="" aria-hidden="true"><span>MongoDB</span></span>
           </div>
         </div>
       </article>
@@ -677,13 +672,13 @@ html:not(.dark) footer{border-color:var(--border)!important;background:var(--bg)
           <h3 id="tech-devops">Deployment & Tooling</h3>
           <p class="lead">Hosting, process management, CI/CD and developer tooling for production apps.</p>
           <div class="tech-badges">
-            <span class="tech-badge"><i class="devicon-git-plain colored" aria-hidden="true"></i><span>Git</span></span>
-            <span class="tech-badge"><i class="devicon-github-original colored" aria-hidden="true"></i><span>GitHub</span></span>
-            <span class="tech-badge"><i class="devicon-amazonwebservices-plain-wordmark colored" aria-hidden="true"></i><span>AWS</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/git-plain.svg" alt="" aria-hidden="true"><span>Git</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/github-original.svg" alt="" aria-hidden="true"><span>GitHub</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/amazonwebservices-plain-wordmark.svg" alt="" aria-hidden="true"><span>AWS</span></span>
             <span class="tech-badge"><span aria-hidden="true">🖥️</span><span>EC2</span></span>
-            <span class="tech-badge"><i class="devicon-nginx-original colored" aria-hidden="true"></i><span>Nginx</span></span>
-            <span class="tech-badge"><i class="devicon-vercel-original colored" aria-hidden="true"></i><span>Vercel</span></span>
-            <span class="tech-badge"><i class="devicon-postman-plain colored" aria-hidden="true"></i><span>Postman</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/nginx-original.svg" alt="" aria-hidden="true"><span>Nginx</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/vercel-original.svg" alt="" aria-hidden="true"><span>Vercel</span></span>
+            <span class="tech-badge"><img class="tech-badge-icon" src="images/icons/postman-original.svg" alt="" aria-hidden="true"><span>Postman</span></span>
           </div>
         </div>
       </article>
@@ -869,7 +864,9 @@ function app() {
 
     init() {
       // dark mode
-      this.dark = localStorage.getItem('theme') !== 'light';
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      localStorage.setItem('theme', savedTheme);
+      this.dark = savedTheme !== 'light';
       this.$watch('dark', v => localStorage.setItem('theme', v ? 'dark' : 'light'));
 
       // scroll
